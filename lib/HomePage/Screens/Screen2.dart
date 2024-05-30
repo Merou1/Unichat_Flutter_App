@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:unichat/Demande/demander.dart';
 
@@ -113,6 +115,15 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             const SizedBox(height: 20),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DocumentRequestScreen()),
+
+                        );
+                      },
+                      child:
                             Container(
                               width: 54,
                               height: 56,
@@ -122,7 +133,7 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                            ),
+                            ),),
                             const SizedBox(height: 20),
                             MouseRegion(
                               onEnter: (event) => setState(() {
@@ -131,11 +142,12 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                               onExit: (event) => setState(() {
                                 _isHoveringDemandez = false;
                               }),
-                              child: GestureDetector(
+                              child: InkWell(
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => DocumentRequestScreen()),
+
                                   );
                                 },
                                 child: Text(
@@ -145,11 +157,10 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                                     fontSize: 32,
                                     fontFamily: 'Open Sans Condensed',
                                     fontWeight: FontWeight.w300,
-                                    decoration: _isHoveringDemandez
-                                        ? TextDecoration.underline
-                                        : TextDecoration.none,
+                                    decoration: TextDecoration.underline,
+
                                     decorationThickness: 2,
-                                    decorationColor: Color(0xFF3139FF),
+                                    decorationColor: Colors.lightBlue,
                                   ),
                                 ),
                               ),
@@ -192,11 +203,10 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                                   fontSize: 32,
                                   fontFamily: 'Open Sans Condensed',
                                   fontWeight: FontWeight.w300,
-                                  decoration: _isHoveringSuivre
-                                      ? TextDecoration.underline
-                                      : TextDecoration.none,
+                                  decoration: TextDecoration.underline,
+
                                   decorationThickness: 2,
-                                  decorationColor: Color(0xFF3139FF),
+                                  decorationColor: Colors.lightBlue,
                                 ),
                               ),
                             ),
