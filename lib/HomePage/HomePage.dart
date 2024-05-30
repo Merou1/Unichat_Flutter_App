@@ -1,9 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:unichat/HomePage/Screens/Screen1.dart';
-import 'package:unichat/HomePage/Screens/Screen2.dart';
-import 'package:unichat/HomePage/Screens/Screen3.dart';
+import '../Login/login.dart';
+import 'Screens/Screen1.dart';
+import 'Screens/Screen2.dart';
+import 'Screens/Screen3.dart';
+
+
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,6 +21,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     Screen3(),
   ];
 
+  Future<void> _signOut() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Login()), // Ensure the correct widget is used for SignIn
+    );
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -26,21 +36,33 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent, // Match the container's background color
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: Center(
-              child: _widgetOptions.elementAt(_selectedIndex),
+          Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: _widgetOptions.elementAt(_selectedIndex),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 40,
+            right: 20,
+            child: FloatingActionButton(
+              onPressed: _signOut,
+              backgroundColor: Colors.white,
+              child: Icon(Icons.exit_to_app,color: Colors.lightBlueAccent,),
             ),
           ),
         ],
       ),
       bottomNavigationBar: Container(
         height: 85,
-        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20,top:20),
+        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 20),
         decoration: BoxDecoration(
           color: Colors.white, // Set the navigation bar background to white
           borderRadius: BorderRadius.circular(30), // Rounded corners
@@ -79,22 +101,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ),
         ),
       ),
-    );
-  }
-}
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
     );
   }
 }

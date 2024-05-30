@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unichat/Demande/demander.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,7 +36,7 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
       vsync: this,
       duration: const Duration(seconds: 1),
     );
-    _heightAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(_controller); // You might want to adjust these values if you want an actual height change.
+    _heightAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(_controller);
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _controller.forward();
   }
@@ -55,7 +56,7 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
       color: Colors.lightBlueAccent,
       child: Column(
         children: [
-          Center(child: Container(margin: EdgeInsets.fromLTRB(0, 20, 0, 50),padding:EdgeInsets.all(8),child: Image(image: AssetImage('images/unamed1.png',)),width: 150,height: 150,decoration: BoxDecoration(borderRadius: BorderRadius.circular(90),border: Border.all(width: 0.5,color: Colors.white)),)),
+          Center(child: Container(margin: EdgeInsets.fromLTRB(0, 55, 0, 50),padding:EdgeInsets.all(8),child: Image(image: AssetImage('images/unamed1.png',)),width: 100,height: 100,decoration: BoxDecoration(borderRadius: BorderRadius.circular(90),border: Border.all(width: 0.5,color: Colors.white)),)),
 
           Align(
             alignment: Alignment.center,
@@ -69,7 +70,7 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(40.0), // Same radius for all corners
                     child: Container(
                       width: screenWidth * 0.95, // Adjust width as needed
-                      height: screenHeight * 0.6, // Height modified to 60% of the screen height
+                      height: screenHeight * 0.57, // Height modified to 60% of the screen height
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(40.0), // Same radius for all corners
@@ -81,7 +82,7 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                           children: [
                             Center(
                               child: Container(
-                                margin: const EdgeInsets.fromLTRB(20, 70, 0, 0),
+                                margin: const EdgeInsets.fromLTRB(20, 50, 0, 0),
                                 child: const Text(
                                   'Démarche A Suivre',
                                   style: TextStyle(
@@ -105,16 +106,23 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const Text(
-                              '1-Demandez',
-                              style: TextStyle(
-                                color: Color(0xFF003366), // Darker blue color
-                                fontSize: 32,
-                                fontFamily: 'Open Sans Condensed',
-                                fontWeight: FontWeight.w300,
-                                //decoration: TextDecoration.underline,
-                                decorationThickness: 2,
-                                decorationColor: Color(0xFF3139FF),
+                            InkWell(
+                              onTap: () {
+                                // Action to perform on tap
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => DocumentRequestScreen()),
+                                );                              },
+                              child: const Text(
+                                '1-Demandez',
+                                style: TextStyle(
+                                  color: Color(0xFF003366), // Darker blue color
+                                  fontSize: 32,
+                                  fontFamily: 'Open Sans Condensed',
+                                  fontWeight: FontWeight.w300,
+                                  decorationThickness: 2,
+                                  decorationColor: Color(0xFF3139FF),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 10),

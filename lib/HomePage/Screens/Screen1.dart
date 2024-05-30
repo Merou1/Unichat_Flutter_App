@@ -1,28 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
 import '../HMSS_Pages/Messages.dart';
 import '../HMSS_Pages/Scolarite.dart';
-import '../HMSS_Pages/Support.dart';    // Ensure to replace 'your_package' with the actual import path
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Screen1(),
-      ),
-    );
-  }
-}
+import '../HMSS_Pages/Support.dart';
 
 class Screen1 extends StatefulWidget {
   @override
@@ -54,118 +33,105 @@ class _Screen1State extends State<Screen1> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(margin: EdgeInsets.fromLTRB(0, 70, 0, 0),
-      color: Colors.lightBlueAccent, // Set the main background color
-      child: Column(
+    return Scaffold(
+      backgroundColor: Colors.lightBlueAccent, // Set the main background color
+      body: Stack(
         children: [
-          Center(
-            child: Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 50),
-              padding: EdgeInsets.all(8),
-              child: Image.asset('images/unamed1.png'),
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(90),
-                border: Border.all(width: 0.5, color: Colors.white),
+          Column(
+            children: [
+              Center(
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 0, 50),
+                  padding: EdgeInsets.all(8),
+                  child: Image.asset('images/unamed1.png'),
+                  width: 150,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(90),
+                    border: Border.all(width: 0.5, color: Colors.white),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: Material(
-                    elevation: 200.0,
-                    borderRadius: BorderRadius.circular(40.0),
-                    shadowColor: Colors.black,
-                    child: Container(
-                      width: screenWidth * 0.95,
-                      height: screenHeight * _heightAnimation.value,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
+              Align(
+                alignment: Alignment.center,
+                child: AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, child) {
+                    return Opacity(
+                      opacity: _opacityAnimation.value,
+                      child: Material(
+                        elevation: 200.0,
                         borderRadius: BorderRadius.circular(40.0),
-                      ),
-                      child: Center(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: const Text(
-                                  'Messages',
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 18,
+                        shadowColor: Colors.black,
+                        child: Container(
+                          width: screenWidth * 0.95,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                          child: Center(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: const Text(
+                                      'Messages',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    trailing: const Icon(Icons.arrow_forward_ios, color: Colors.blue,),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Messages()));
+                                    },
                                   ),
-                                ),
-                                trailing: const Icon(Icons.arrow_forward_ios,color: Colors.blue,),
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Messages()));
-                                },
-                              ),
-                              const Divider(color: Colors.grey),
-                              ListTile(
-                                title: const Text(
-                                  'Scolarite',
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 18,
+                                  const Divider(color: Colors.grey),
+                                  ListTile(
+                                    title: const Text(
+                                      'Scolarite',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    trailing: const Icon(Icons.arrow_forward_ios, color: Colors.blue,),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Scolarite()));
+                                    },
                                   ),
-                                ),
-                                trailing: const Icon(Icons.arrow_forward_ios,color: Colors.blue,),
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Scolarite()));
-                                },
-                              ),
-                              const Divider(color: Colors.grey),
-                              ListTile(
-                                title: const Text(
-                                  'Support',
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 18,
+                                  const Divider(color: Colors.grey),
+                                  ListTile(
+                                    title: const Text(
+                                      'Support',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    trailing: const Icon(Icons.arrow_forward_ios, color: Colors.blue,),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Support()));
+                                    },
                                   ),
-                                ),
-                                trailing: const Icon(Icons.arrow_forward_ios,color: Colors.blue,),
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Support()));
-                                },
+                                  const Divider(color: Colors.grey),
+                                ],
                               ),
-                              const Divider(color: Colors.grey),
-                              ListTile(
-                                title: const Text(
-                                  'Sign Out',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 24,
-                                  ),
-                                ),
-                                trailing: const Icon(Icons.arrow_forward_ios,color: Colors.blue,),
-                                onTap: () {
-                                  // Handle sign out
-                                },
-                              ),
-                              const Divider(color: Colors.grey),
-                            ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                );
-              },
-            ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
+
         ],
       ),
     );
   }
-
-
 }
