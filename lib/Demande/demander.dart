@@ -319,8 +319,8 @@ class SummaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
-      appBar: AppBar(
-        title: Center(child: Text('Summary')),
+      appBar: AppBar(backgroundColor: Colors.white,
+        title: Center(child: Text('Summary',style: TextStyle(color: Colors.lightBlueAccent),)),
       ),
       body: Center(
         child: Container(
