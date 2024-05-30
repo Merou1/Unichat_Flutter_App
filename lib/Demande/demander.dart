@@ -430,29 +430,30 @@ class _PromotionVersionCycleScreenState extends State<PromotionVersionCycleScree
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
-        title: Text('Enter Promotion, Version, and Cycle'),
+        title: Text('Enter Promotion, Version, and Cycle',style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
+            TextField(style: TextStyle(color: Colors.white),
               controller: _promotionController,
-              decoration: InputDecoration(labelText: 'Enter Promotion'),
+              decoration: InputDecoration(labelText: 'Enter Promotion',labelStyle: TextStyle(color: Colors.white)),
             ),
             TextField(
               controller: _versionController,
-              decoration: InputDecoration(labelText: 'Enter Version'),
+              decoration: InputDecoration(labelText: 'Enter Version',labelStyle: TextStyle(color: Colors.white), // Change the color here
+              ),
             ),
             TextField(
               controller: _cycleController,
-              decoration: InputDecoration(labelText: 'Enter Cycle'),
+              decoration: InputDecoration(labelText: 'Enter Cycle',labelStyle: TextStyle(color: Colors.white)),
             ),
             SizedBox(height: 16),
-            ElevatedButton(
+            ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
               onPressed: _navigateToSummary,
-              child: Text('Submit'),
+              child: Center(child: Text('Submit',style: TextStyle(color: Colors.lightBlueAccent),)),
             ),
           ],
         ),
@@ -487,21 +488,21 @@ class SummaryScreen extends StatelessWidget {
           children: [
             Text(
               'Promotion: $promotion',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 22,color: Colors.white),
             ),
             SizedBox(height: 8),
             Text(
               'Version: $version',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 22,color: Colors.white),
             ),
             SizedBox(height: 8),
             Text(
               'Cycle: $cycle',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 22,color: Colors.white),
             ),
             SizedBox(height: 16),
             Text(
-              'Your request has been submitted and will be processed soon.',
+              'Your request has been submitted and will be processed soon.It\'ll be ready to print soon',
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ],
