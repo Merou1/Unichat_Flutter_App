@@ -12,9 +12,9 @@ class _Screen3State extends State<Screen3> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text('Profile',style: TextStyle(color: Colors.white)),
+        title: Text('Profile',style: TextStyle(color: Colors.lightBlueAccent)),
         elevation: 0,
       ),
       body: Container(
