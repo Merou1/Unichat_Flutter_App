@@ -67,6 +67,12 @@ class _DocumentRequestScreenState extends State<DocumentRequestScreen>
       backgroundColor: Colors.lightBlueAccent,
       body: Stack(
         children: [
+          // Background image with color overlay
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.lightBlueAccent,
+            ),
+          ),
           Column(
             children: [
               Padding(
@@ -245,11 +251,6 @@ class _DocConfirmState extends State<DocConfirm> with SingleTickerProviderStateM
   late AnimationController _controller;
   late Animation<double> _heightAnimation;
   int _selectedIndex = 0;
-  String? selectedCycle;
-  String? selectedFiliere;
-  String? selectedVersion;
-  String? selectedPromotion;
-  String? motif;
 
   @override
   void initState() {
@@ -275,18 +276,10 @@ class _DocConfirmState extends State<DocConfirm> with SingleTickerProviderStateM
     });
   }
 
-  void _navigateToSummary() {
+  void _navigateToPromotionVersionCycle() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => SummaryScreen(
-          cycle: selectedCycle ?? '',
-          filiere: selectedFiliere ?? '',
-          version: selectedVersion ?? '',
-          promotion: selectedPromotion ?? '',
-          motif: motif ?? '',
-        ),
-      ),
+      MaterialPageRoute(builder: (context) => PromotionVersionCycleScreen()),
     );
   }
 
@@ -363,15 +356,15 @@ class _DocConfirmState extends State<DocConfirm> with SingleTickerProviderStateM
                                   Text(
                                     'Document: ${widget.selectedDocument}',
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black
                                     ),
                                   ),
                                   SizedBox(height: 20),
                                   ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),
                                   ),
-                                    onPressed: _navigateToSummary,
+                                    onPressed: _navigateToPromotionVersionCycle,
                                     child: Text('Submit',style: TextStyle(color: Colors.white),),
                                   ),
                                 ],
@@ -388,45 +381,80 @@ class _DocConfirmState extends State<DocConfirm> with SingleTickerProviderStateM
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: 85,
-        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.blueGrey.withOpacity(1),
-              blurRadius: 10,
-              spreadRadius: 2,
-              offset: Offset(0, 4),
-            )
-          ],
+
+    );
+  }
+}
+
+class PromotionVersionCycleScreen extends StatefulWidget {
+  @override
+  _PromotionVersionCycleScreenState createState() => _PromotionVersionCycleScreenState();
+}
+
+class _PromotionVersionCycleScreenState extends State<PromotionVersionCycleScreen> {
+  late TextEditingController _promotionController;
+  late TextEditingController _versionController;
+  late TextEditingController _cycleController;
+
+  @override
+  void initState() {
+    super.initState();
+    _promotionController = TextEditingController();
+    _versionController = TextEditingController();
+    _cycleController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _promotionController.dispose();
+    _versionController.dispose();
+    _cycleController.dispose();
+    super.dispose();
+  }
+
+  void _navigateToSummary() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SummaryScreen(
+          promotion: _promotionController.text,
+          version: _versionController.text,
+          cycle: _cycleController.text,
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.format_list_bulleted),
-                label: 'Activities',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                label: 'Profile',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.blue[800],
-            unselectedItemColor: Colors.blue[300],
-            onTap: _onItemTapped,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
+      appBar: AppBar(
+        title: Text('Enter Promotion, Version, and Cycle'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: _promotionController,
+              decoration: InputDecoration(labelText: 'Enter Promotion'),
+            ),
+            TextField(
+              controller: _versionController,
+              decoration: InputDecoration(labelText: 'Enter Version'),
+            ),
+            TextField(
+              controller: _cycleController,
+              decoration: InputDecoration(labelText: 'Enter Cycle'),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _navigateToSummary,
+              child: Text('Submit'),
+            ),
+          ],
         ),
       ),
     );
@@ -435,23 +463,20 @@ class _DocConfirmState extends State<DocConfirm> with SingleTickerProviderStateM
 
 class SummaryScreen extends StatelessWidget {
   final String cycle;
-  final String filiere;
   final String version;
   final String promotion;
-  final String motif;
 
   const SummaryScreen({
     Key? key,
     required this.cycle,
-    required this.filiere,
     required this.version,
     required this.promotion,
-    required this.motif,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
         title: Text('Summary'),
       ),
@@ -466,17 +491,7 @@ class SummaryScreen extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'Motif de la demande: $motif',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Version du document demandé: $version',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Filière: $filiere',
+              'Version: $version',
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 8),
@@ -486,8 +501,8 @@ class SummaryScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Votre demande a été envoyée et sera traitée dans les meilleurs délais.',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              'Your request has been submitted and will be processed soon.',
+              style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ],
         ),
