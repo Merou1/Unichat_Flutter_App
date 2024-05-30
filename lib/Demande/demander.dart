@@ -61,30 +61,34 @@ class _DocumentRequestScreenState extends State<DocumentRequestScreen> with Sing
         children: [
           Column(
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      // Handle back button press
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 60.0),
-                      child: Text(
-                        'Scolarite',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () {
+                        // Handle back button press
+                        Navigator.pop(context);
+                      },
                     ),
-                  ),
-                ],
+                    Expanded(
+
+                        child: Center(
+                          child: Text(
+                            'Scolarite',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+
+                    ),
+                  ],
+                ),
               ),
               Expanded(
                 child: Center(
@@ -111,14 +115,14 @@ class _DocumentRequestScreenState extends State<DocumentRequestScreen> with Sing
                                     'Document demander',
                                     style: TextStyle(
                                       fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.bold,color: Colors.blue[800]
                                     ),
                                   ),
                                 ),
                                 SizedBox(height: 20), // Space between title and dropdown
                                 Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.grey.shade300, // Light grey background color
+                                    color: Colors.grey.shade50, // Light grey background color
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   padding: EdgeInsets.all(10), // Padding inside the container
@@ -128,7 +132,7 @@ class _DocumentRequestScreenState extends State<DocumentRequestScreen> with Sing
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.grey.shade600),
+                                          border: Border.all(color: Colors.lightBlueAccent),
                                           borderRadius: BorderRadius.circular(15),
                                         ),
                                         child: Padding(
@@ -137,7 +141,7 @@ class _DocumentRequestScreenState extends State<DocumentRequestScreen> with Sing
                                             child: DropdownButton<String>(
                                               value: null,
                                               isExpanded: true,
-                                              icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
+                                              icon: Icon(Icons.arrow_drop_down, color: Colors.lightBlueAccent),
                                               onChanged: (String? newValue) {
                                                 // Handle changes here
                                               },

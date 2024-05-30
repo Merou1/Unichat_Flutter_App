@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Screen2(), // Use Screen2 as the main screen
+        body: Screen2(),
       ),
     );
   }
@@ -28,6 +28,9 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _heightAnimation;
   late Animation<double> _opacityAnimation;
+
+  bool _isHoveringDemandez = false;
+  bool _isHoveringSuivre = false;
 
   @override
   void initState() {
@@ -56,8 +59,21 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
       color: Colors.lightBlueAccent,
       child: Column(
         children: [
-          Center(child: Container(margin: EdgeInsets.fromLTRB(0, 55, 0, 50),padding:EdgeInsets.all(8),child: Image(image: AssetImage('images/unamed1.png',)),width: 100,height: 100,decoration: BoxDecoration(borderRadius: BorderRadius.circular(90),border: Border.all(width: 0.5,color: Colors.white)),)),
-
+          Center(
+            child: Container(
+              margin: EdgeInsets.fromLTRB(0, 55, 0, 50),
+              padding: EdgeInsets.all(8),
+              child: Image(
+                image: AssetImage('images/unamed1.png'),
+              ),
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(90),
+                border: Border.all(width: 0.5, color: Colors.white),
+              ),
+            ),
+          ),
           Align(
             alignment: Alignment.center,
             child: AnimatedBuilder(
@@ -67,13 +83,13 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                   opacity: _opacityAnimation.value,
                   child: Material(
                     elevation: 200.0,
-                    borderRadius: BorderRadius.circular(40.0), // Same radius for all corners
+                    borderRadius: BorderRadius.circular(40.0),
                     child: Container(
-                      width: screenWidth * 0.95, // Adjust width as needed
-                      height: screenHeight * 0.57, // Height modified to 60% of the screen height
+                      width: screenWidth * 0.95,
+                      height: screenHeight * 0.57,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(40.0), // Same radius for all corners
+                        borderRadius: BorderRadius.circular(40.0),
                       ),
                       child: SingleChildScrollView(
                         child: Column(
@@ -86,10 +102,12 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                                 child: const Text(
                                   'Démarche A Suivre',
                                   style: TextStyle(
-                                    color: Colors.blue, // Changed color to blue
-                                    fontSize: 30,fontWeight: FontWeight.w800,
+                                    color: Colors.blue,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w800,
                                     fontFamily: 'Orelega One',
-                                    decoration: TextDecoration.underline,decorationColor: Colors.lightBlue
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.lightBlue,
                                   ),
                                 ),
                               ),
@@ -100,28 +118,39 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                               height: 56,
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage('images/pdf.png'), // Updated image asset
+                                  image: AssetImage('images/pdf.png'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            InkWell(
-                              onTap: () {
-                                // Action to perform on tap
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => DocumentRequestScreen()),
-                                );                              },
-                              child: const Text(
-                                '1-Demandez',
-                                style: TextStyle(
-                                  color: Color(0xFF003366), // Darker blue color
-                                  fontSize: 32,
-                                  fontFamily: 'Open Sans Condensed',
-                                  fontWeight: FontWeight.w300,
-                                  decorationThickness: 2,
-                                  decorationColor: Color(0xFF3139FF),
+                            MouseRegion(
+                              onEnter: (event) => setState(() {
+                                _isHoveringDemandez = true;
+                              }),
+                              onExit: (event) => setState(() {
+                                _isHoveringDemandez = false;
+                              }),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => DocumentRequestScreen()),
+                                  );
+                                },
+                                child: Text(
+                                  '1-Demandez',
+                                  style: TextStyle(
+                                    color: Color(0xFF003366),
+                                    fontSize: 32,
+                                    fontFamily: 'Open Sans Condensed',
+                                    fontWeight: FontWeight.w300,
+                                    decoration: _isHoveringDemandez
+                                        ? TextDecoration.underline
+                                        : TextDecoration.none,
+                                    decorationThickness: 2,
+                                    decorationColor: Color(0xFF3139FF),
+                                  ),
                                 ),
                               ),
                             ),
@@ -129,7 +158,7 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                             const Text(
                               'Faites en ligne vos demandes de documents.',
                               style: TextStyle(
-                                color: Colors.blue, // Changed color to blue
+                                color: Colors.blue,
                                 fontSize: 17,
                                 fontFamily: 'Open Sans Condensed',
                                 fontWeight: FontWeight.w700,
@@ -143,29 +172,39 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                               height: 56,
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage('images/newspaper.png'), // Updated image asset
+                                  image: AssetImage('images/newspaper.png'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const Text(
-                              '2-Suivre',
-                              style: TextStyle(
-                                color: Color(0xFF003366), // Darker blue color
-                                fontSize: 32,
-                                fontFamily: 'Open Sans Condensed',
-                                fontWeight: FontWeight.w300,
-                           //     decoration: TextDecoration.underline,
-                                decorationThickness: 2,
-                                decorationColor: Color(0xFF3139FF),
+                            MouseRegion(
+                              onEnter: (event) => setState(() {
+                                _isHoveringSuivre = true;
+                              }),
+                              onExit: (event) => setState(() {
+                                _isHoveringSuivre = false;
+                              }),
+                              child: Text(
+                                '2-Suivre',
+                                style: TextStyle(
+                                  color: Color(0xFF003366),
+                                  fontSize: 32,
+                                  fontFamily: 'Open Sans Condensed',
+                                  fontWeight: FontWeight.w300,
+                                  decoration: _isHoveringSuivre
+                                      ? TextDecoration.underline
+                                      : TextDecoration.none,
+                                  decorationThickness: 2,
+                                  decorationColor: Color(0xFF3139FF),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 10),
                             const Text(
                               'Suivez l\'état d\'avancement de vos demandes.',
                               style: TextStyle(
-                                color: Colors.blue, // Changed color to blue
+                                color: Colors.blue,
                                 fontSize: 17,
                                 fontFamily: 'Open Sans Condensed',
                                 fontWeight: FontWeight.w700,
