@@ -194,47 +194,7 @@ class _DocumentRequestScreenState extends State<DocumentRequestScreen>
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: 85,
-        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-        decoration: BoxDecoration(
-          color: Colors.white, // Set the navigation bar background to white
-          borderRadius: BorderRadius.circular(30), // Rounded corners
-          boxShadow: [
-            BoxShadow(
-              color: Colors.blueGrey.withOpacity(1), // Soften the shadow
-              blurRadius: 10,
-              spreadRadius: 2,
-              offset: Offset(0, 4),
-            )
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.format_list_bulleted),
-                label: 'Activities',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                label: 'Profile',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.blue[800], // Set selected item color to blue
-            unselectedItemColor: Colors.blue[300], // Set unselected item color to a lighter blue
-            onTap: _onItemTapped,
-            backgroundColor: Colors.transparent, // Transparent background inside the clipped area
-            elevation: 0, // No elevation for the inner navigation bar
-          ),
-        ),
-      ),
+
     );
   }
 }
@@ -298,8 +258,8 @@ class _PromotionVersionCycleScreenState extends State<PromotionVersionCycleScree
                 offset: Offset(5,5),
               ),
             ],
-              borderRadius: BorderRadius.circular(30),
-              color: (Colors.white)),
+                borderRadius: BorderRadius.circular(30),
+                color: (Colors.white)),
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -343,7 +303,6 @@ class _PromotionVersionCycleScreenState extends State<PromotionVersionCycleScree
     );
   }
 }
-
 class SummaryScreen extends StatelessWidget {
   final String cycle;
   final String version;
@@ -366,7 +325,7 @@ class SummaryScreen extends StatelessWidget {
       body: Center(
         child: Container(
           width: 300,
-          height: 300,
+          height: 400, // Increased height to accommodate buttons
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -385,31 +344,54 @@ class SummaryScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 22),
+
                   Text(
                     'Promotion: $promotion',
-                    style: TextStyle(fontSize: 22, color: Colors.lightBlueAccent),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 22),
+                  Divider(color: Colors.lightBlueAccent,),
                   Text(
                     'Version: $version',
-                    style: TextStyle(fontSize: 22, color: Colors.lightBlueAccent),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 22),
+                  Divider(color: Colors.lightBlueAccent,),
                   Text(
                     'Cycle: $cycle',
-                    style: TextStyle(fontSize: 22, color: Colors.lightBlueAccent),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 22),
+                  Divider(color: Colors.lightBlueAccent,),
                   Text(
                     'Your request has been submitted and will be processed soon. It\'ll be ready to print soon',
-                    style: TextStyle(fontSize: 16, color: Colors.lightBlueAccent),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                  Divider(color: Colors.lightBlueAccent,),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),elevation:MaterialStateProperty.all(20)),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Annuler',style: TextStyle(color: Colors.white),),
+                      ),
+                      ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.lightBlueAccent),elevation:MaterialStateProperty.all(20)),
+                        onPressed: () {
+                          // Implement download functionality here
+                        },
+                        child: Text('Download',style: TextStyle(color: Colors.white),),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
         ),
-
       ),
     );
   }

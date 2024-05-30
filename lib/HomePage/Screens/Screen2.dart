@@ -115,25 +115,25 @@ class _Screen2State extends State<Screen2> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             const SizedBox(height: 20),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DocumentRequestScreen()),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => DocumentRequestScreen()),
 
-                        );
-                      },
-                      child:
-                            Container(
-                              width: 54,
-                              height: 56,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('images/pdf.png'),
-                                  fit: BoxFit.fill,
+                                );
+                              },
+                              child:
+                              Container(
+                                width: 54,
+                                height: 56,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('images/pdf.png'),
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
-                              ),
-                            ),),
+                              ),),
                             const SizedBox(height: 20),
                             MouseRegion(
                               onEnter: (event) => setState(() {
