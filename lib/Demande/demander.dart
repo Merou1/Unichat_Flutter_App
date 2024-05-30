@@ -286,30 +286,58 @@ class _PromotionVersionCycleScreenState extends State<PromotionVersionCycleScree
       appBar: AppBar(
         title: Text('Enter Promotion, Version, and Cycle',style: TextStyle(color: Colors.white)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextField(style: TextStyle(color: Colors.white),
-              controller: _promotionController,
-              decoration: InputDecoration(labelText: 'Enter Promotion',labelStyle: TextStyle(color: Colors.white)),
-            ),
-            TextField(
-              controller: _versionController,
-              decoration: InputDecoration(labelText: 'Enter Version',labelStyle: TextStyle(color: Colors.white), // Change the color here
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Container(height: 500.0,
+            decoration: BoxDecoration(boxShadow:[
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 3,
+                offset: Offset(5,5),
               ),
+            ],
+              borderRadius: BorderRadius.circular(30),
+              color: (Colors.white)),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(style: TextStyle(color: Colors.lightBlueAccent),
+                    controller: _promotionController,
+                    decoration: InputDecoration(labelText: 'Enter Promotion',labelStyle: TextStyle(color: Colors.lightBlueAccent)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _versionController,
+                    decoration: InputDecoration(labelText: 'Enter Version',labelStyle: TextStyle(color: Colors.lightBlueAccent), // Change the color here
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _cycleController,
+                    decoration: InputDecoration(labelText: 'Enter Cycle',labelStyle: TextStyle(color: Colors.lightBlueAccent)),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
+                  child: ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.lightBlueAccent)),
+                    onPressed: _navigateToSummary,
+                    child: Center(child: Text('Submit',style: TextStyle(color: Colors.white),)),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: _cycleController,
-              decoration: InputDecoration(labelText: 'Enter Cycle',labelStyle: TextStyle(color: Colors.white)),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
-              onPressed: _navigateToSummary,
-              child: Center(child: Text('Submit',style: TextStyle(color: Colors.lightBlueAccent),)),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -344,7 +372,7 @@ class SummaryScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.white.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 5,
                 blurRadius: 3,
                 offset: Offset(5,5),
