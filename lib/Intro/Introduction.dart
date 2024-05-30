@@ -27,7 +27,7 @@ class _IntroPage extends StatelessWidget {
     return Container(
       width: screenWidth,
       height: screenHeight,
-      decoration: BoxDecoration(color: Color(0xFF181FC7)),
+      decoration: BoxDecoration(color: Colors.lightBlueAccent),
       child: Stack(
         children: [
           Positioned(

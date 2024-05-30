@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent, // Match the container's background color
       body: Column(
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           borderRadius: BorderRadius.circular(30), // Rounded corners
           boxShadow: [
             BoxShadow(
-              color: Colors.white.withOpacity(1), // Soften the shadow
+              color: Colors.blueGrey.withOpacity(1), // Soften the shadow
               blurRadius: 10,
               spreadRadius: 2,
               offset: Offset(0, 4),
